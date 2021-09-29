@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)file:///C:/Users/koray.ozsoy/Desktop/Map1/Map.html -->
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="./Map_files/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./Map_files/ol.css" type="text/css">
+
+    <!--<link rel="stylesheet" href="./Map_files/accessible.css">-->
+    <title>Accessible Map</title>
+
+    <script src="./Map_files/ol.js"></script>
+    <link href="./Map_files/ol.css" rel="stylesheet" />
+    <script src="./Map_files/jquery-3.5.1.min.js"></script>
+    <!--<script src="./Map_files/bootstrap.bundle.min.js"></script>-->
+    <link href="Map_files/bootstrap-5.1.1-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="Map_files/bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="Map_files/bootstrap-5.1.1-dist/js/bootstrap.bundle.js"></script>
+    <script src="Map_files/bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
+    <link href="Map_files/bootstrap-5.1.1-dist/fontawesome-free/css/v4-shims.css" rel="stylesheet" />
+    <link href="Map_files/bootstrap-5.1.1-dist/fontawesome-free/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="Map_files/bootstrap-5.1.1-dist/fontawesome-free/css/all.css" rel="stylesheet" />
+    <script src="Map_files/ol-ext.js"></script>
+    <script src="Map_files/google.js"></script>
+
+
+    <link href="./Map_files/map.css" rel="stylesheet" />
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div id="app_viewport">
+        <div id="app_header">
+            <div id="app_header_title">Koray OZ-Demo-App</div>
+            <ul id="app_header_navigation">
+            </ul>
+        </div>
+        <div id="map_container">
+            <div id="map" class="map" tabindex="0">
+            </div>
+            <div id="map_item_list">
+
+
+
+
+
+
+                <table>
+                    <tr>
+                        <th>Base Layers</th>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="layer-select">
+                                <option value="Aerial">Aerial</option>
+                                <option value="AerialWithLabelsOnDemand" selected>Aerial with labels</option>
+                                <option value="RoadOnDemand">Road</option>
+                                <option value="CanvasDark">Road dark</option>
+
+                                <option value="OSM">OSM</option>
+
+                                <option value="GoogleRoad">Google Road</option>
+                                <option value="GoogleSatellite">Google Satellite</option>
+                                <option value="GoogleHybrid">Google Hybrid</option>
+                                <option value="GoogleTerrain">Google Terrain</option>
+                                <option value="GoogleOnlyRoad">Google Only Road</option>
+
+
+
+                            </select>
+
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <th>Address</th>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="txtAddress" type="text" />
+
+                        </td>
+
+                        <td><input id="btnSearch" type="button" value="Search" class="btn-primary" onclick="searchAddress(txtAddress.value);"></td>
+
+
+                    </tr>
+
+
+                    <tr>
+                        <th>Map Zoom</th>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Shift + Mause (Left Click)
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <th>Map Rotate</th>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Shift+ Ctrl + Mause (Left Click)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Options</th>
+
+                    </tr>
+
+                </table>
+
+
+                <div class="options">
+                
+                    <ul>
+                        <li>
+                            <input id="style" type="checkbox" onchange="setHandleStyle()"><label for="style"> styles transform handles (using fontawesome)</label>
+                        </li>
+                        <li>
+                            <input id="scale" type="checkbox" onchange="setPropertie(this.id);" checked="checked"><label for="scale"> enable scale</label>
+                        </li>
+                        <li>
+                            <input id="stretch" type="checkbox" onchange="setPropertie(this.id);" checked="checked"><label for="stretch"> enable stretch</label>
+                        </li>
+                        <li>
+                            <input id="rotate" type="checkbox" onchange="setPropertie(this.id);" checked="checked"><label for="rotate"> enable rotate</label>
+                        </li>
+                        <li>
+                            <input id="translate" type="checkbox" onchange="setPropertie(this.id);" checked="checked"><label for="translate"> enable translate</label>
+                        </li>
+                        <li>
+                            <input id="translateFeature" type="checkbox" onchange="setPropertie(this.id);"><label for="translateFeature"> translate when click on feature</label>
+                        </li>
+                        <li>
+                            <input id="keepAspectRatio" type="checkbox" onchange="setAspectRatio(this.id);"><label for="keepAspectRatio"> force keepAspectRatio (default use <i>Shift</i>)</label>
+                        </li>
+                        <li>
+                            <input id="enableRotatedTransform" type="checkbox" onchange="setPropertie(this.id);"><label for="enableRotatedTransform"> force matching the map rotation</label>
+                        </li>
+                        <li>
+                            SetRotateCenter:
+                            <button onclick="firstPoint=false; interaction.setCenter()">objects</button>
+                            <button onclick="firstPoint=false; interaction.setCenter(map.getView().getCenter())">view center</button>
+                            <button onclick="firstPoint=true;">first point</button>
+                        </li>
+                        <li>
+                            <hr>
+                            Use <i>Shift</i> to add object to tranform
+                            <hr>
+                            Use <i>Shift</i> key to preserve proportions when scaling (see keepAspectRatio).
+                            <br>
+                            Use <i>Ctrl</i> key to modify the center when scaling.
+                        </li>
+                    </ul>
+                    <div style="background:white; padding:0 0.45em;"><span id="info"></span>&nbsp;</div>
+                </div>
+
+
+
+
+                <table>
+                    <tr>
+                        <td>
+                            <p id="lblRuler"> Length</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input id="Button1" type="button" value="JSON Export" class="btn-primary" onclick="jsonExport();"></td>
+                      
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="lblJson"> Geojson Results</p>
+                        </td>
+                       
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="app_footer"></div>
+    </div>
+
+    <script src="./Map_files/map.js"></script>
+
+
+
+    <!--<script src="./Map_files/common2.js"></script>
+    <script src="./Map_files/accessible.js"></script>-->
+
+
+
+
+</body>
+</html>
