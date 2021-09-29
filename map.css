@@ -1,0 +1,211 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+#app_viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#app_header {
+    border-bottom: 1px solid #9C9C9C;
+    background-color: #687b9E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #E6E6E6;
+}
+
+#app_header_title {
+    padding: 0px 15px;
+    font-size: 23px;
+}
+
+#app_header_navigation {
+    padding-right: 15px;
+    list-style-type: none;
+}
+
+    #app_header_navigation li {
+        display: inline;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+        #app_header_navigation li.mini_nav_item {
+            display: none;
+        }
+
+        #app_header_navigation li:hover {
+            color: #D0D0D0;
+        }
+
+        #app_header_navigation li:first-child {
+            margin-left: 0px;
+        }
+
+#app_footer {
+    height: 25px;
+    border-top: 1px solid #9C9C9C;
+    background-color: #687b9E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #E6E6E6;
+    padding: 0px 15px;
+}
+
+#map_container {
+    flex: 1;
+    display: flex;
+  
+}
+
+#map {
+    flex: 1;
+}
+
+    #map .ol-control button {
+        cursor: pointer;
+    }
+
+    #map .marker_control {
+        top: 80px;
+        left: .5em;
+    }
+
+    #map .geometry_control {
+        top: 118px;
+        left: .5em;
+    }
+
+        #map .geometry_control:not(.ol-collapsed) {
+            background: rgba(255, 255, 255, .8);
+        }
+
+        #map .geometry_control button {
+            float: left;
+        }
+
+        #map .geometry_control ul {
+            list-style-type: none;
+            margin: 0px;
+        }
+
+        #map .geometry_control.ol-collapsed ul {
+            display: none;
+        }
+
+        #map .geometry_control ul li {
+            margin: 5px;
+            padding: 2px 5px;
+            cursor: pointer;
+            background-color: rgba(0, 60, 136, .5);
+            border-radius: 2px;
+            color: #fff;
+        }
+
+            #map .geometry_control ul li:hover {
+                background-color: rgba(0, 60, 136, .7);
+            }
+
+    #map .track_control {
+        bottom: 46px;
+        left: .5em;
+    }
+
+        #map .track_control button.active_track {
+            background-color: #63A263;
+        }
+
+            #map .track_control button.active_track:hover {
+                background-color: #548C54;
+            }
+
+    #map #coordinate_control {
+        bottom: .5em;
+        left: .5em;
+        display: flex;
+        align-items: center;
+    }
+
+#coordinate_control:not(.ol-collapsed) {
+    background: rgba(255, 255, 255, .8);
+}
+
+#map #coordinate_control .coordinate_display {
+    display: inline-block;
+    min-width: 190px;
+    margin: 0px 10px;
+}
+
+#map #coordinate_control.ol-collapsed .coordinate_display {
+    display: none;
+}
+
+#map_item_list {
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #D0D0D0;
+    border-left: 1px solid #9C9C9C;
+    max-width: 20%;
+}
+
+.map_item {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(171, 171, 171, 1);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(171, 171, 171, 1);
+    box-shadow: 1px 1px 5px 0px rgba(171, 171, 171, 1);
+}
+
+    .map_item:hover {
+        background-color: #ADADAD;
+    }
+
+@media screen and (max-width:400px) {
+    #app_header_navigation li.full_nav_item {
+        display: none;
+    }
+
+    #app_header_navigation li.mini_nav_item {
+        display: inline;
+    }
+
+    #map_container {
+        flex-direction: column;
+    }
+
+    #map {
+        min-height: 150px;
+    }
+
+    #map_item_list {
+        border-left: none;
+        border-top: 1px solid #9C9C9C;
+    }
+
+    .map_item {
+        width: 65px;
+        height: 65px;
+        float: left;
+    }
+}
+
+@media screen and (max-width:250px) {
+    .map_item {
+        width: 50px;
+        height: 50px;
+    }
+}
